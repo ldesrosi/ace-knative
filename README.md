@@ -1,8 +1,9 @@
 # ace-knative
-Subset of scripts from https://github.com/ot4i/knapp-connect  
 
-Full documentation available here:  
+This repository is largely based on a subset of the scripts from https://github.com/ot4i/knapp-connect and from the full documentation available here:  
 https://ot4i.github.io/knapp-connect/  
+
+It is a simplified version to focus on testing ACE flows with k-native serving.    
 
 To get started:  
 1. Create namespace using `oc apply -f namespace.yaml`  
@@ -22,3 +23,9 @@ Note that the entitlement key can be retrieved [here](https://myibm.ibm.com/prod
   
 4. Create the build config using `oc apply -f build/`  
 5. Create the k-native declaration for the HTTPEcho ACE service: `oc apply -f integration-server-knative-service`
+6. Get the ACE k-native endpoint: `oc get ksvc ace-echo --template={{.status.url}}`  
+
+Service can be tested using:
+```
+time curl http://<<ace-knative-endpoint-from-step-6>>/Echo
+```
