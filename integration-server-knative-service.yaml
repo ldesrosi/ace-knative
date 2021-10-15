@@ -1,0 +1,35 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ace-echo
+  namespace: ace-serverless
+spec:
+  template:
+#    metadata:
+#      annotations:
+#        autoscaling.knative.dev/minScale: "1"
+    spec:
+      containerConcurrency: 5
+      containers:
+        - image: image-registry.openshift-image-registry.svc:5000/ace-serverless/ace-echo:latest-amd64
+          env:
+            - name: ACE_ENABLE_METRICS
+              value: "false"
+            - name: ACE_ENABLE_OPEN_TRACING
+              value: "false"
+            - name: ACE_ENDPOINT_TYPE
+              value: http
+            - name: DESIGNER_FLOWS_OPERATION_MODE
+              value: disabled
+            - name: LOG_FORMAT
+              value: basic
+            - name: LICENSE
+              value: "accept"
+          resources:
+            limits: 
+              cpu: 0.3
+          ports:
+          - containerPort: 7800
+            name: http1
+            protocol: TCP
+

@@ -1,0 +1,34 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+ name: ace-echo
+ namespace: ace-serverless
+ labels:
+   name: ace-echo
+spec:
+ triggers: []
+ source:
+   type: dockerfile
+   dockerfile: |
+     FROM ace-server-prod:latest-amd64
+     ENV ACE_ENABLE_METRICS=false
+     ENV ACE_ENABLE_OPEN_TRACING=false
+     ENV ACE_ENDPOINT_TYPE=http
+     ENV DESIGNER_FLOWS_OPERATION_MODE=disabled
+     ENV LOG_FORMAT=basic
+     ENV LICENSE=accept
+     COPY HTTPEcho.bar /home/aceuser/initial-config/bars/HTTPEcho.bar
+ strategy:
+   type: Docker
+   dockerStrategy:
+     from:
+       kind: ImageStreamTag
+       name: 'ace-server-prod:latest-amd64'
+       namespace: ace-serverless
+     pullSecret:
+       name: cp.icr.io
+ output:
+   to:
+     kind: ImageStreamTag
+     name: 'ace-echo:latest-amd64'
+     namespace: ace-serverless
