@@ -25,13 +25,13 @@ oc tag cp.icr.io/cp/appc/ace-server-prod@sha256:04bc376391a00ff1923d9122f93911b0
 ```  
 oc start-build ace-build --from-file ./bars/HTTPEcho.bar  
 ```  
-3. Setup the k-native `serving` using these two links:  
+5. Setup the k-native `serving` using these two links:  
 * https://docs.openshift.com/container-platform/4.7/serverless/admin_guide/install-serverless-operator.html  
 *  https://docs.openshift.com/container-platform/4.7/serverless/admin_guide/installing-knative-serving.html  
   
-4. Create the build config using `oc apply -f build/`  
-5. Create the k-native declaration for the HTTPEcho ACE service: `oc apply -f integration-server-knative-service.yaml`
-6. Get the ACE k-native endpoint: `oc get ksvc ace-echo --template={{.status.url}}`  
+6. Create the build config using `oc apply -f build/`  
+7. Create the k-native declaration for the HTTPEcho ACE service: `oc apply -f integration-server-knative-service.yaml`
+8. Get the ACE k-native endpoint: `oc get ksvc ace-echo --template={{.status.url}}`  
 
 Service can be tested using:
 ```
