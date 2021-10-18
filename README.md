@@ -22,7 +22,7 @@ Note that the entitlement key can be retrieved [here](https://myibm.ibm.com/prod
 *  https://docs.openshift.com/container-platform/4.7/serverless/admin_guide/installing-knative-serving.html  
   
 4. Create the build config using `oc apply -f build/`  
-5. Create the k-native declaration for the HTTPEcho ACE service: `oc apply -f integration-server-knative-service`
+5. Create the k-native declaration for the HTTPEcho ACE service: `oc apply -f integration-server-knative-service.yaml`
 6. Get the ACE k-native endpoint: `oc get ksvc ace-echo --template={{.status.url}}`  
 
 Service can be tested using:
