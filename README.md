@@ -23,7 +23,7 @@ oc tag cp.icr.io/cp/appc/ace-server-prod@sha256:04bc376391a00ff1923d9122f93911b0
 ```  
 4. Start the build  
 ```  
-oc start-build ace-build --from-file ./bars/HTTPEcho.bar  
+oc start-build ace-echo --from-file ./bars/HTTPEcho.bar  
 ```  
 5. Setup the k-native `serving` using these two links:  
 * https://docs.openshift.com/container-platform/4.7/serverless/admin_guide/install-serverless-operator.html  
